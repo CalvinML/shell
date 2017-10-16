@@ -7,9 +7,9 @@
 - 进程控制相关的系统调用的使用（如 fork,exev）
 - 信号的概念及系统调用 signal的使用
 
-##1.2 效果截图
+## 1.2 效果截图
 ![这里写图片描述](http://img.blog.csdn.net/20171016141912089?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvel9tbDExOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
-##1.3 设计流程
+## 1.3 设计流程
 ![这里写图片描述](http://img.blog.csdn.net/20171016145603602?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvel9tbDExOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 # 二、main 函数的设计
 首先，以自顶向下的方式探讨一下在 Linux Shell 的周期内主要做了哪些事:
@@ -51,7 +51,7 @@ int main()
 ```
 - 注：print_prompt()、scan_command(command) 和 parse_semicolon(command) 三个函数是自定义函数，功能分别为：用于输出提示符，扫描多条命令语句，基于分号解析出单条命令语句，并以字符串的形式存进全局变量 all 中。概念简单，其详细代码在项目完整代码中。
 
-#三、程序的核心功能 execute 函数
+# 三、程序的核心功能 execute 函数
 execute函数完成的主要功能如下：
 - 判断用户执行的是否是 Shell 的内建命令，如果是则执行（这里为了强调概念，没有过多的添加内建命令）
 - 解析单条命令语句，即将命令名和命令参数解析并保存在字符串数组，以便调用 bf_exec命令。
@@ -146,7 +146,7 @@ void execute(char *command)
     return;
 }
 ```
-##3.1处理标准输出重定向问题的函数： file_out
+## 3.1处理标准输出重定向问题的函数： file_out
 本函数的定义为： **void file_out(char \*arg[], char \*out_file, int type)。** arg 代表命令行参数。 **out_file** 代表重定向的文件名。 通过** dup2(f, 1)** 语句使得标准输出文件（文件描述符为1）重定向到制定的文件**out_file**(文件描述符f)。至于是追加重定向还是覆盖重定向取决于函数 open 的打开模式（是否是 **O_APPEND**）。
 这部分的完整代码如下：
 ```
@@ -171,7 +171,7 @@ void file_out(char *arg[], char *out_file, int type)
     }
 }
 ```
-##3.2 处理标准输入重定向问题的函数： file_in
+## 3.2 处理标准输入重定向问题的函数： file_in
 本函数的定义原型为 **void file_in(char \*arg[], char \*in_file, char \*out_file, int type)** 类似于 file_out函数，该本分仍然采用 dup2(in, 0)来完成标准输入文件（文件描述符0）重定向到执行的文件 in_file（文件描述符为 in）。
 - 这部分的完整代码如下：
 ```
@@ -200,7 +200,7 @@ void file_in(char *arg[], char *in_file, char *out_file, int type)
 }
 ```
 
-##3.3 实现命令执行的最后一步： bf_exec
+## 3.3 实现命令执行的最后一步： bf_exec
 本函数定义的原型为：**void bf_exec(char \*arg[], int type)**, arg 指命令行，type标识前台还是后台运行。
 - 实现命令的执行必须在 Shell 父进程下 fork 一个子进程，并在子进程中调用 execvp 函数装载子进程执行的代码（所要执行的命令）。
 - 程序的前后台执行取决于父进程在子进程执行过程中是否是阻塞的。代码中，前台进程的父进程需要调用 wait(&pid) 阻塞，等待前台执行的命令执行完才能唤醒。
@@ -267,12 +267,12 @@ void bf_exec(char *arg[], int type)
     }
 }
 ```
-#四、实验总结
+# 四、实验总结
 通过本实验，我们完成了一个支持输入输出重定向，支持后台运行的 Linux Shell 命令解释器。通过该项目的学习，可以更进一步的了解 Linux Shell 的工作机制。在使用重定向 > 和>> 时 建议将目录切换到自己的家目录，否则没权限建立重定向文件。
 但是在本次实验中出现了一点bug还没有解决，重定`< file1`和`< file1 >> file2` 的功能在运行时没有效果。希望各位童鞋能够改进代码，代码中的不足也希望大家能够指出，谢谢。
 - 该项目的完整代码见:github
 
-#五、参考资料
+# 五、参考资料
 
 - [实验楼](https://www.shiyanlou.com/)
 - [UNIX环境高级编程》](https://book.douban.com/subject/1788421/)
