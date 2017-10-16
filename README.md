@@ -1,4 +1,3 @@
-[TOC]
 # 一、实验简介
 
 > 《C 语言实现 Linux Shell 命令解释器》项目可以培养 Linux 系统编程能力，尤其是在多进程方面。可以了解fork、execvp 等重要的系统调用。另外还能深入到底层理解 Linux Shell 的功能的实现手段。
@@ -11,7 +10,7 @@
 ##1.2 效果截图
 ![这里写图片描述](http://img.blog.csdn.net/20171016141912089?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvel9tbDExOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 ##1.3 设计流程
-![流程图](http://upload-images.jianshu.io/upload_images/8457727-857a6a80cfe8b677.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![这里写图片描述](http://img.blog.csdn.net/20171016145603602?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvel9tbDExOA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 # 二、main 函数的设计
 首先，以自顶向下的方式探讨一下在 Linux Shell 的周期内主要做了哪些事:
 初始化：在这一步，一个典型的 Shell 应该读取配置文件并执行配置功能。这样可以改变 Shell 的行为。
